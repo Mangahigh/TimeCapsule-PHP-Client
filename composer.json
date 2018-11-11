@@ -1,0 +1,26 @@
+{
+  "name": "mangahigh/timecapsule-php-client",
+  "type": "library",
+  "description": "A client library for TimeCapsule",
+  "license": "MIT",
+  "readme": "README.md",
+
+  "authors": [
+    {
+      "name": "Alec Sammon",
+      "email": "alec.sammon@mangahigh.com",
+      "homepage": "https://www.mangahigh.com",
+      "role": "Developer"
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "Timecapsule\\": "src/"
+    }
+  },
+
+  "require": {
+    "php": "^7.0"
+  }
+}
