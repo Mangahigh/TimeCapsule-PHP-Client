@@ -7,7 +7,6 @@ require __DIR__ . '/../src/Storable.php';
 require __DIR__ . '/../src/ArrayMessage/ArrayMessage.php';
 
 $config = new \TimeCapsule\Config();
-$config->setHost('vagrant');
 
 $publisher = new \TimeCapsule\Publisher();
 $message = new \TimeCapsule\ArrayMessage\ArrayMessage([
@@ -16,5 +15,6 @@ $message = new \TimeCapsule\ArrayMessage\ArrayMessage([
 
 $embargoDate = new \DateTime();
 $embargoDate->add(new \DateInterval('PT0S'));
+$queueName = 'test';
 
-$publisher->publishMessage($message, $embargoDate);
+$publisher->publishMessage($message, $embargoDate, $queueName);

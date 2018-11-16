@@ -20,7 +20,7 @@ class Subscriber
         $this->config = $config ?: new Config();
     }
 
-    public function fetchMessage(MessageFactory $messageFactory = null): Storable
+    public function fetchMessage(string $queueName = Config::DEFAULT_QUEUE_NAME, MessageFactory $messageFactory = null): Storable
     {
         if (!$messageFactory) {
             $messageFactory = new ArrayMessageFactory();
@@ -35,7 +35,7 @@ class Subscriber
 
         $command = [
             'FETCH',
-            'api'
+            $queueName
         ];
 
         $commandString = implode(' ', $command);

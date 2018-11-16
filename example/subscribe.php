@@ -8,10 +8,11 @@ require __DIR__ . '/../src/ArrayMessage/ArrayMessage.php';
 require __DIR__ . '/../src/ArrayMessage/ArrayMessageFactory.php';
 
 $config = new \TimeCapsule\Config();
-$config->setHost('vagrant');
 
-$subscriber = new \TimeCapsule\Subscriber();
-$message = $subscriber->fetchMessage();
+$subscriber = new \TimeCapsule\Subscriber($config);
+$queueName = 'test';
+
+$message = $subscriber->fetchMessage($queueName);
 
 var_dump($message->getDataArray());
 

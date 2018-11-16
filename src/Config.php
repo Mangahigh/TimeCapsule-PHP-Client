@@ -4,6 +4,10 @@ namespace TimeCapsule;
 
 class Config
 {
+    const DEFAULT_QUEUE_NAME = 'default';
+
+    // --
+
     /**
      * The host name that the TimeCapsule server is running on
      * @var string

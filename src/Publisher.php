@@ -26,6 +26,7 @@ class Publisher
      *
      * @param \TimeCapsule\Storable $message
      * @param \DateTime             $embargoDate
+     * @param string                $queueName
      *
      * @throws \TimeCapsule\Exception\FailedToConnect
      * @throws \TimeCapsule\Exception\FailedToSendCommand
@@ -33,7 +34,7 @@ class Publisher
      *
      * @return boolean
      */
-    public function publishMessage(Storable $message, \DateTime $embargoDate)
+    public function publishMessage(Storable $message, \DateTime $embargoDate, string $queueName = Config::DEFAULT_QUEUE_NAME)
     {
         $timeCapsuleConnectionSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         socket_connect(
@@ -50,7 +51,7 @@ class Publisher
 
         $command = [
             'STORE',
-            'api',
+            $queueName,
             $embargoDate->format('c')
         ];
 
