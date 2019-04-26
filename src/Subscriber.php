@@ -27,7 +27,7 @@ class Subscriber
         }
 
         $timeCapsuleConnectionSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_connect($timeCapsuleConnectionSocket, '127.0.0.1', 1777);
+        socket_connect($timeCapsuleConnectionSocket, $this->config->getHost(), $this->config->getPort());
 
         if (socket_read($timeCapsuleConnectionSocket, 2) !== 'OK') {
             throw new Exception\FailedToConnect();

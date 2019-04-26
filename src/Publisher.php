@@ -37,6 +37,10 @@ class Publisher
     public function publishMessage(Storable $message, \DateTime $embargoDate, string $queueName = Config::DEFAULT_QUEUE_NAME)
     {
         $timeCapsuleConnectionSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+
+        socket_set_option($timeCapsuleConnectionSocket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => 0, 'usec' => $this->config->getTimeout() * 1000]);
+        socket_set_option($timeCapsuleConnectionSocket, SOL_SOCKET, SO_SNDTIMEO, ['sec' => 0, 'usec' => $this->config->getTimeout() * 1000]);
+
         socket_connect(
             $timeCapsuleConnectionSocket,
             $this->config->getHost(),

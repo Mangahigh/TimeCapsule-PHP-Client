@@ -20,19 +20,19 @@ class Config
      */
     private $port = 1777;
 
+    /**
+     * The timeout for sending message in milliseconds
+     * @var integer
+     */
+    private $timeout = 100;
+
     // --
 
-    /**
-     * @param string $host
-     */
     public function setHost(string $host)
     {
         $this->host = $host;
     }
 
-    /**
-     * @param integer $port
-     */
     public function setPort(int $port)
     {
         $this->port = $port;
@@ -40,21 +40,25 @@ class Config
 
     // --
 
-    /**
-     * @return integer
-     */
     public function getPort(): int
     {
         return $this->port;
     }
 
-    /**
-     * @return string
-     */
     public function getHost(): string
     {
         return $this->host;
     }
 
+    // --
 
+    public function getTimeout(): int
+    {
+        return $this->timeout;
+    }
+
+    public function setTimeout(int $timeout)
+    {
+        $this->timeout = $timeout;
+    }
 }
