@@ -45,10 +45,14 @@ class Subscriber
             throw new Exception\FailedToSendCommand();
         }
 
-        $data = socket_read($timeCapsuleConnectionSocket, 65536);
+        $nullByte = "\000";
+        $data = $nullByte;
+        while($data === $nullByte) {
+            $data = socket_read($timeCapsuleConnectionSocket, 65536);
+        }
 
         if (!$data) {
-            throw new Exception\FailedToFetchMessage();
+            throw new Exception\FailedToFetchMessage(socket_last_error($timeCapsuleConnectionSocket));
         }
 
         $message = $messageFactory::createFromString($data);
