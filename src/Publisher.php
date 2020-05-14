@@ -41,11 +41,15 @@ class Publisher
         socket_set_option($timeCapsuleConnectionSocket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => 0, 'usec' => $this->config->getTimeout() * 1000]);
         socket_set_option($timeCapsuleConnectionSocket, SOL_SOCKET, SO_SNDTIMEO, ['sec' => 0, 'usec' => $this->config->getTimeout() * 1000]);
 
-        socket_connect(
-            $timeCapsuleConnectionSocket,
-            $this->config->getHost(),
-            $this->config->getPort()
-        );
+        try {
+            socket_connect(
+                $timeCapsuleConnectionSocket,
+                $this->config->getHost(),
+                $this->config->getPort()
+            );
+        } catch (\Throwable $e) {
+            throw new Exception\FailedToConnect($e->getMessage());
+        }
 
         if (socket_read($timeCapsuleConnectionSocket, 2) !== 'OK') {
             throw new Exception\FailedToConnect();
